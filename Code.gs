@@ -36,11 +36,9 @@ function create_ranges_for_data(form, data, data_section_name){
 function make_form_using_column(column_name) {
   // create a new Google Form document
   
-  var form = FormApp.create('Data lablleing - ' + column_name)
+  var form = FormApp.create('Data labelling - ' + column_name)
   
-  desc = "\
-  Please grade each document. \n \
-  This is an extremly important step in the development of the automation.";
+  desc = "Thank you for taking the time to label this data!";
   
   form.setDescription(desc);
   form.setProgressBar(true);
