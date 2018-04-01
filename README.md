@@ -1,2 +1,2 @@
 # Friendlier data labelling
-Code resources for doing friendlier data labelling using generated Google Forms with Google App Script.
+Code resources for doing friendlier data labelling using generated Google Forms with [Google App Script](https://developers.google.com/apps-script/reference/forms/).
