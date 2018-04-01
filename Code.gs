@@ -1,5 +1,6 @@
 function getSpreadsheetData(sheetName) {
-  // This function gives you an array of objects modeling a worksheet's tabular data, where the first items — column headers — become the property names.
+  // Return an list of objects (one for each row) containing the sheets data. 
+  
   var arrayOfArrays = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName || 'Sheet1').getDataRange().getValues();
   var headers = arrayOfArrays.shift();
   return arrayOfArrays.map(function (row) {
@@ -12,25 +13,29 @@ function getSpreadsheetData(sheetName) {
   });
 }
 
-
 function create_ranges_for_data(form, data, data_section_name){
+  
+   // loop throughh each row
    data.forEach(function (row) {
      
-    form.addPageBreakItem()
-    
-    form.addSectionHeaderItem()
-        .setTitle(data_section_name);
+       // create a new question page
+      form.addPageBreakItem()
 
-     
-    form.addScaleItem()
-        .setTitle(row[data_section_name])
-        .setBounds(1, 10)
-        .setRequired(true);
+       // add page title
+      form.addSectionHeaderItem()
+          .setTitle(data_section_name);
+
+       // create number range input with the title being the document to be labeled
+      form.addScaleItem()
+          .setTitle(row[data_section_name])
+          .setBounds(1, 10)
+          .setRequired(true);
   });
 }
 
-function make_form(column_name) {
-  // create form
+function make_form_using_column(column_name) {
+  // create a new Google Form document
+  
   var form = FormApp.create('Data lablleing - ' + column_name)
   
   desc = "\
@@ -42,15 +47,14 @@ function make_form(column_name) {
   form.setShowLinkToRespondAgain(false)
  
   var data = getSpreadsheetData();
-  create_ranges_for_data(form, data, column_name);
   
+  create_ranges_for_data(form, data, column_name);
 }
 
-var COLUMN_TO_USE = 'Input text'
-
 function gen_form(){
- 
-    make_form(COLUMN_TO_USE);
-
+  
+    var COLUMN_TO_USE = 'Input text'
+    
+    make_form_using_column(COLUMN_TO_USE);
 }
 
